@@ -1,0 +1,26 @@
+= Generator Extensions
+
+Rails gem that adds some useful commands to Generators
+
+== Install
+
+   gem install generator_extensions --source http://gemcutter.org
+
+== Usage
+
+I was bothered by the lack of a recursive directory copy in the
+Generator commands. As it stands, you can copy individual files like
+so:
+
+      m.file 'layout.html.erb', 'app/views/layouts/application.html.erb'
+
+You can create a directory like this:
+
+      m.directory 'public/stylesheets/blueprint'
+
+But you can't copy an entire directory tree over like this:
+
+  m.directory_copy 'blueprint', 'public/stylesheets/blueprint'
+
+Well, with this little gem you can.
+
