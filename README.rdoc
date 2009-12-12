@@ -12,11 +12,11 @@ I was bothered by the lack of a recursive directory copy in the
 Generator commands. As it stands, you can copy individual files like
 so:
 
-      m.file 'layout.html.erb', 'app/views/layouts/application.html.erb'
+  m.file 'layout.html.erb', 'app/views/layouts/application.html.erb'
 
 You can create a directory like this:
 
-      m.directory 'public/stylesheets/blueprint'
+  m.directory 'public/stylesheets/blueprint'
 
 But you can't copy an entire directory tree over like this:
 
