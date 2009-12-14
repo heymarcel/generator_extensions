@@ -28,7 +28,7 @@ work. This gem makes it a cinch. Just create a directory inside your
 template directory containing a partially duplicated Rails directory
 structure (obviously, only include the directories you need):
 
-<tt>
++
 your_generator.rb
 templates
   -mirror
@@ -38,7 +38,7 @@ templates
     -app
       -controllers
         your_controller.rb
-</tt>
++
 
 Then put this in your manifest definition:
 
