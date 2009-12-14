@@ -11,6 +11,7 @@ begin
     gemspec.homepage = 'http://github.com/heymarcel/generator_extensions'
     gemspec.authors = ['Marcel Levy']
   end
+  Jeweler::GemcutterTasks.new
 rescue LoadError
   puts "Jeweler not available. Install it with: sudo gem install jeweler"
 end

@@ -22,5 +22,31 @@ But you can't copy an entire directory tree over like this:
 
   m.directory_copy 'blueprint', 'public/stylesheets/blueprint'
 
-Well, with this little gem you can.
+Well, with this little gem you can. But wait, there's more! One fairly
+common pattern is a straight copy of files without any fancy template
+work. This gem makes it a cinch. Just create a directory inside your
+template directory containing a partially duplicated Rails directory
+structure (obviously, only include the directories you need):
+
+<tt>
+your_generator.rb
+templates
+  -mirror
+    -public
+      -stylesheets
+        your_stylesheet.css
+    -app
+      -controllers
+        your_controller.rb
+</tt>
+
+Then put this in your manifest definition:
+
+  m.mirror 'name-of-directory-to-mirror'
+
+As an added bonus, if you name your directory 'mirror', you can just
+do this:
+
+  m.mirror
+
 

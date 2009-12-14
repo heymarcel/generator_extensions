@@ -3,8 +3,11 @@ require 'find'
 module Rails
   module Generator
     module Commands
-
       class Create < Base
+
+        def mirror(origin='mirror')
+          directory_copy(origin, '')
+        end
 
         def directory_copy(relative_source, relative_destination=nil)
           source = source_path(relative_source)
@@ -22,6 +25,7 @@ module Rails
             end
           end
         end
+
       end
     end
   end
