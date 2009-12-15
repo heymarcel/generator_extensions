@@ -29,7 +29,7 @@ template directory containing a partially duplicated Rails directory
 structure (obviously, only include the directories you need):
 
   your_generator.rb
-  templates
+  -templates
     -mirror
       -public
         -stylesheets
@@ -47,4 +47,13 @@ do this:
 
   m.mirror
 
+One problem with mirroring a directory tree is that at the moment
+there is no way to distinguish between existing directories (say, the
+ones rails sets up) and any new ones you've implicitly created by
+including them in the mirrored directory tree in your 'templates'
+directory. So when you run the following:
 
+  script/destroy your_generator
+
+it will delete any files you've copied over as part of an "m.mirror"
+command, but none of the new directories.
