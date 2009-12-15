@@ -5,18 +5,20 @@
 
 Gem::Specification.new do |s|
   s.name = %q{generator_extensions}
-  s.version = "0.1.3"
+  s.version = "0.1.6"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Marcel Levy"]
-  s.date = %q{2009-12-14}
+  s.date = %q{2009-12-15}
   s.description = %q{Functions that make it easier to write a Rails generator.}
   s.email = %q{heymarcel@gmail.com}
   s.extra_rdoc_files = [
-    "README.rdoc"
+    "LICENSE",
+     "README.rdoc"
   ]
   s.files = [
     ".gitignore",
+     "LICENSE",
      "README.rdoc",
      "Rakefile",
      "VERSION",
