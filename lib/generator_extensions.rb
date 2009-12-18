@@ -31,10 +31,28 @@ module Rails
 
       class Base
         include RailsGeneratorExtensions
+
+        def add_to_routes(text)
+          first_line = text.split("\n")[0]
+          logger.routes "#{first_line} ..."
+          unless options[:pretend]
+            sentinel = 'ActionController::Routing::Routes.draw do |map|'
+            gsub_file 'config/routes.rb', /(#{Regexp.escape(sentinel)})/mi do |match|
+              "#{match}\n#{text}\n"
+            end
+          end
+        end
+
       end
 
       class Destroy < RewindBase
         include RailsGeneratorExtensions
+
+        def add_to_routes(text)
+          first_line = text.split("\n")[0]
+          logger.routes "#{first_line} ..."
+          gsub_file 'config/routes.rb', /(#{Regexp.escape(text)})/mi, ''
+        end
       end
 
     end

@@ -47,6 +47,26 @@ do this:
 
   m.mirror
 
+There's also a convenience function for adding a whole chunk of code
+to routes.rb. Let's say you set it up like this in your initialize()
+method:
+
+  @route_text =  <<END_OF_ROUTES
+    map.root :controller => 'contig'
+
+    [:find, :graph, :list, :add, :remove].each do |route|
+      map.named_route route.to_s, '/%s' % route.to_s,  :controller => 'contig', :action => route.to_s
+    end
+
+    map.showclique '/clique', :controller => 'contig', :action => 'showclique'
+    map.clearcart  '/clearcart', :controller => 'contig', :action => 'clearcart'
+    map.findclique '/clique/find', :controller => 'contig', :action => 'findclique'
+  END_OF_ROUTES  
+
+Well, then just call this in your manifest:
+
+  m.add_to_routes @route_text
+
 One problem with mirroring a directory tree is that at the moment
 there is no way to distinguish between existing directories (say, the
 ones rails sets up) and any new ones you've implicitly created by
