@@ -33,11 +33,24 @@ module Rails
         include RailsGeneratorExtensions
 
         def add_to_routes(text)
+          add_to_file('config/routes.rb',
+                      'ActionController::Routing::Routes.draw do |map|',
+                      text
+                      )
+        end
+
+        def add_to_initializer(text)
+          add_to_file('config/environment.rb',
+                      'Rails::Initializer.run do |config|',
+                      text)
+        end
+
+        def add_to_file(file, sentinel, text)
           first_line = text.split("\n")[0]
-          logger.routes "#{first_line} ..."
+          m = /:in `([^']+)'$/.match(caller.first)
+          logger.send(m[1].to_sym, first_line) if m
           unless options[:pretend]
-            sentinel = 'ActionController::Routing::Routes.draw do |map|'
-            gsub_file 'config/routes.rb', /(#{Regexp.escape(sentinel)})/mi do |match|
+            gsub_file file, /(#{Regexp.escape(sentinel)})/mi do |match|
               "#{match}\n#{text}\n"
             end
           end
@@ -49,10 +62,19 @@ module Rails
         include RailsGeneratorExtensions
 
         def add_to_routes(text)
-          first_line = text.split("\n")[0]
-          logger.routes "#{first_line} ..."
-          gsub_file 'config/routes.rb', /(#{Regexp.escape(text)})/mi, ''
+          add_to_file('config/routes.rb', nil, text)
         end
+
+        def add_to_initializer(text)
+          add_to_file('config/environment.rb', nil, text)
+        end
+
+        def add_to_file(file, sentinel, text)
+          first_line = text.split("\n")[0]
+          logger.removing first_line
+          gsub_file file, /(#{Regexp.escape(text)}\n)/mi, ''
+        end
+
       end
 
     end

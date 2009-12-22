@@ -67,6 +67,19 @@ Well, then just call this in your manifest:
 
   m.add_to_routes @route_text
 
+In 0.3.0, I've also added a similar function for the initializer in
+<tt>config/environment.rb</tt>, for those things (like
+<tt>config.gem</tt>) that don't go in a file in <tt>initializers/</tt>
+
+  m.add_to_initializers "config.gem 'foo'\nconfig.gem 'bar'"
+
+They're both implemented using a generic <tt>add_to_file()</tt>, which
+you use like this:
+
+  m.add_to_file "filename", "sentinel", "text to insert"
+
+The sentinel is the text immediately preceding the insert.
+
 One problem with mirroring a directory tree is that at the moment
 there is no way to distinguish between existing directories (say, the
 ones rails sets up) and any new ones you've implicitly created by
