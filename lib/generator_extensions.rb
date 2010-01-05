@@ -14,10 +14,9 @@ module RailsGeneratorExtensions
     Find.find(source) do |f|
       source = f.sub(path_to_delete, '')
       target = File.join(relative_destination, source.sub(relative_source, ''))
-      case
-      when File.file?(f)
+      if File.file?(f)
         file source, target
-      when File.directory?(f)
+      elsif File.directory?(f)
         directory target unless self.class.to_s.include? "Destroy"
       end
     end
@@ -47,8 +46,8 @@ module Rails
 
         def add_to_file(file, sentinel, text)
           first_line = text.split("\n")[0]
-          m = /:in `([^']+)'$/.match(caller.first)
-          logger.send(m[1].to_sym, first_line) if m
+          matched = /:in `([^']+)'$/.match(caller.first)
+          logger.send(matched[1].to_sym, first_line) if matched
           unless options[:pretend]
             gsub_file file, /(#{Regexp.escape(sentinel)})/mi do |match|
               "#{match}\n#{text}\n"

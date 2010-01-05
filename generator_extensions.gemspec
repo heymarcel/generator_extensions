@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Marcel Levy"]
-  s.date = %q{2009-12-22}
+  s.date = %q{2010-01-05}
   s.description = %q{Generators can be a bit of a pain to write. This little gem smooths out 
 some rough edges, by letting you mirror an entire directory in one line,
 and providing convenience functions to add entire blocks of code
