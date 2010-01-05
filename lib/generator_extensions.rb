@@ -11,12 +11,12 @@ module RailsGeneratorExtensions
     relative_destination ||= relative_source
     path_to_delete = "#{source_root}/"
 
-    Find.find(source) do |f|
-      source = f.sub(path_to_delete, '')
+    Find.find(source) do |name|
+      source = name.sub(path_to_delete, '')
       target = File.join(relative_destination, source.sub(relative_source, ''))
-      if File.file?(f)
+      if File.file?(name)
         file source, target
-      elsif File.directory?(f)
+      elsif File.directory?(name)
         directory target unless self.class.to_s.include? "Destroy"
       end
     end
